@@ -1,7 +1,7 @@
 StereoVision: Library and utilities for 3d reconstruction from stereo cameras
 =============================================================================
 
-    **Updating to work with OpenCV 3+**
+    **Updated to work with OpenCV 3+**
 
 StereoVision is a package for working with stereo cameras, especially with the
 intent of using them to produce 3D point clouds. The focus is on performance,
@@ -12,7 +12,7 @@ variable does or what values would make sense for it and no explanation is
 provided in the StereoVision documentation, refer to OpenCV's documentation in
 order to better understand how they work.
 
-It's available on PyPI, so you can install it like this::
+The OpenCV 2.x version is available on PyPI, so you can install it like this::
 
     pip install StereoVision
 
@@ -22,6 +22,11 @@ Tutorials are available on the Stackable blog:
 - `Stereo calibration`_
 - `Tuning the block matcher`_
 - `Producing point clouds`_
+
+Example commands:
+
+    calibrate_cameras --rows 6 --columns 9 --square-size 25 --show-chessboards ~/images/ ~/calibration/
+    images_to_pointcloud ~/calibration/ ~/images/left_030.ppm ~/images/right_030.ppm pointcloud.ply
 
 If you find a bug or would like to request a feature, please `report it with
 the issue tracker <https://github.com/erget/StereoVision/issues>`_. If you'd

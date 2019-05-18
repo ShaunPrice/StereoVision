@@ -26,14 +26,13 @@ Classes:
 
         * ``StereoBMError``
 
-            * ``InvalidBMPresetError``
             * ``InvalidSearchRangeError``
             * ``InvalidWindowSizeError``
 
         * ``StereoSGBMError``
 
             * ``InvalidNumDisparitiesError``
-            * ``InvalidSADWindowSizeError``
+            * ``InvalidBlockSizeError``
             * ``InvalidFirstDisparityChangePenaltyError``
             * ``InvalidSecondDisparityChangePenaltyError``
             * ``InvalidUniquenessRatioError``
@@ -69,8 +68,8 @@ class InvalidWindowSizeError(StereoBMError):
 class InvalidNumDisparitiesError(StereoSGBMError):
     """Invalid number of disparities."""
 
-class InvalidSADWindowSizeError(StereoSGBMError):
-    """Invalid search window size."""
+class InvalidBlockSizeError(StereoSGBMError):
+    """Invalid block size."""
 
 class InvalidFirstDisparityChangePenaltyError(StereoSGBMError):
     """Invalid first disparity change penalty."""
