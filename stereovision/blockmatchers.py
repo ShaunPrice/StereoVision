@@ -34,7 +34,6 @@ import simplejson
 import numpy as np
 from stereovision.exceptions import (InvalidSearchRangeError,
                                     InvalidWindowSizeError,
-                                    InvalidBMPresetError,
                                     InvalidNumDisparitiesError,
                                     InvalidSADWindowSizeError,
                                     InvalidUniquenessRatioError,
@@ -113,8 +112,7 @@ class StereoBM(BlockMatcher):
     """A stereo block matching ``BlockMatcher``."""
 
     parameter_maxima = {"search_range": None,
-                       "window_size": 255,
-                       "stereo_bm_preset": cv2.STEREO_BM_NARROW_PRESET}
+                       "window_size": 255}
 
     @property
     def search_range(self):
@@ -149,38 +147,16 @@ class StereoBM(BlockMatcher):
                                       self.parameter_maxima["window_size"] + 1))
         self._replace_bm()
 
-    @property
-    def stereo_bm_preset(self):
-        """Return private ``_bm_preset`` value."""
-        return self._bm_preset
-
-    @stereo_bm_preset.setter
-    def stereo_bm_preset(self, value):
-        """Set private ``_stereo_bm_preset`` and reset ``_block_matcher``."""
-        if value in (cv2.STEREO_BM_BASIC_PRESET,
-                     cv2.STEREO_BM_FISH_EYE_PRESET,
-                     cv2.STEREO_BM_NARROW_PRESET):
-            self._bm_preset = value
-        else:
-            raise InvalidBMPresetError("Stereo BM preset must be defined as "
-                                       "cv2.STEREO_BM_*_PRESET.")
-        self._replace_bm()
-
     def _replace_bm(self):
         """Replace ``_block_matcher`` with current values."""
-        self._block_matcher = cv2.StereoBM(preset=self._bm_preset,
-                                          ndisparities=self._search_range,
+        self._block_matcher = cv2.StereoBM_create( ndisparities=self._search_range,
                                           SADWindowSize=self._window_size)
 
-    def __init__(self, stereo_bm_preset=cv2.STEREO_BM_BASIC_PRESET,
-                 search_range=80,
+    def __init__(self, search_range=80,
                  window_size=21,
                  settings=None):
-        self._bm_preset = cv2.STEREO_BM_BASIC_PRESET
         self._search_range = 0
         self._window_size = 5
-        #: OpenCV camera type for ``_block_matcher``
-        self.stereo_bm_preset = stereo_bm_preset
         #: Number of disparities for ``_block_matcher``
         self.search_range = search_range
         #: Search window size for ``_block_matcher``
