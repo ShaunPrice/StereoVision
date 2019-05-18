@@ -1,6 +1,8 @@
 StereoVision: Library and utilities for 3d reconstruction from stereo cameras
 =============================================================================
 
+** ONLY WORKS WITH OPENCV 2.x **
+
 StereoVision is a package for working with stereo cameras, especially with the
 intent of using them to produce 3D point clouds. The focus is on performance,
 ease of usability, and the ability to construct 3D imaging setups cheaply.
